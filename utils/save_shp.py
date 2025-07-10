@@ -2,24 +2,20 @@ import os
 import geopandas as gpd
 from config import data_folder
 
-def save_shp(gdf: gpd.GeoDataFrame, folder_name: str):
+def save_shp(gdf: gpd.GeoDataFrame, file_name: str = "data.shp"):
     """
-    
-    Salva um geodataframe como .shp na data_folder
+    Salva um GeoDataFrame como .shp diretamente na data_folder.
 
     Args:
-        gdf: geodataframe a ser salvo
-        folder_name: nome da subfolder (dentro da data_folder) para salvar o .shp
-    
+        gdf: GeoDataFrame a ser salvo
+        file_name: nome do arquivo .shp a ser salvo (default: "data.shp")
     """
     
-    save_path = os.path.join(data_folder, folder_name)
+    if not os.path.exists(data_folder):
+        os.makedirs(data_folder)
 
-    if not os.path.exists(save_path):
-        os.makedirs(save_path)
+    file_path = os.path.join(data_folder, file_name)
 
-        file_path = os.path.join(save_path, "data.shp")
+    gdf.to_file(file_path)
 
-        gdf.to_file(file_path)
-
-        print(f"Shapefile salvo em {file_path}")
+    print(f"Shapefile salvo em {file_path}")
