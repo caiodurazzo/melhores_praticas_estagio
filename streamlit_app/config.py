@@ -11,5 +11,9 @@ def get_data_path(filename):
     :param filename: Name of the file to retrieve.
     :return: Full path to the specified data file.
     """
-    return os.path.abspath(os.path.join(data_folder, filename))
+    path = os.path.abspath(os.path.join(data_folder, filename))
+
+    if not os.path.exists(path):
+        raise ValueError(f"File '{filename}' not found in data folder.")
+    return path
 
