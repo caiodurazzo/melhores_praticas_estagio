@@ -17,3 +17,5 @@ def get_data_path(filename):
         raise ValueError(f"File '{filename}' not found in data folder.")
     return path
 
+
+STREAMLIT_SHP = 'streamlit_data_{ano}.shp'

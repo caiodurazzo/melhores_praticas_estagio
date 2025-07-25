@@ -42,16 +42,16 @@ class DataLoader:
         
         return gdf_mapa
     
-    def pipeline(self):
+    def pipeline(self, ano:int):
 
         df_ppa, gdf = self.load_data()
-        merged = self.agrupar_por_subprefeitura(df_ppa, 2024)
+        merged = self.agrupar_por_subprefeitura(df_ppa, ano)
         gdf_mapa = self.merge_com_subs(merged, gdf)
         
         return gdf_mapa
     
-    def __call__(self) -> gpd.GeoDataFrame:
-        return self.pipeline()
+    def __call__(self, ano:int) -> gpd.GeoDataFrame:
+        return self.pipeline(ano)
     
 
 load_data = DataLoader()
